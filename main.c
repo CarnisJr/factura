@@ -1,6 +1,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
+#include<ctype.h>
 
 int main(void){
 
@@ -10,9 +11,9 @@ int main(void){
     char nombre[100], apellido[100], ingresoCedula[10], direccion[100], telefono[10];
 
     //variables precios y cantidad de productos
-    int cant, precioUnidad, total;
-    int arrayCantidad[5], arrayPrecioUnidad[5], arrayDescripcion[5][100];
-    char descripcion[100];
+    int cant, precioUnidad, total, subtotal;
+    int arrayCantidad[5], arrayPrecioUnidad[5];
+    char descripcion[100], arrayDescripcion[5][100];
 
     //Variables para verificar la cedula
     char digitoChar;
@@ -24,7 +25,6 @@ int main(void){
     do{
         
         printf("\t---FACTURA---\n");
-        fflush(stdin);
         printf("Cedula:\t ");
         scanf("%s", ingresoCedula);
         printf("\n");
@@ -57,7 +57,7 @@ int main(void){
             numeroFinal = (sumatoria + residuo) - sumatoria;
         ingresoCedula[9] = (char) numeroFinal + 48;
         
-        verificarCedula = strcmp(cedula, ingresoCedula);
+        verificarCedula = strcmp("1723372825", ingresoCedula);
         
         if(verificarCedula != 0){
 
@@ -94,11 +94,34 @@ int main(void){
         printf("Ingrese el nombre del producto del producto %d: ", i);
         scanf("%s", descripcion);
 
-        arrayCantidad[i] = cant;
-        arrayPrecioUnidad[i] = precioUnidad;
+        strcpy(arrayDescripcion[i - 1], descripcion);
+        arrayCantidad[i - 1] = cant;
+        arrayPrecioUnidad[i - 1] = precioUnidad;
+        subtotal = subtotal + (cant * precioUnidad);
     }
 
-    //Impresión de los detalles
+    system("clear");
+
+    //Descuento calcular
+    if(subtotal >= 1000){
+        subtotal = subtotal * 0.90;
+
+    }else if(subtotal > 500){
+        
+        subtotal = subtotal * 0.93;
+
+    }else if(subtotal > 100){
+        subtotal = subtotal * 0.95;
+
+    }
+
+        
+    total = subtotal * 1.12;
+
+    //Impresion de los detalles
+    printf("Nombre: %s %s\n", nombre, apellido);
+    printf("Direccion: %s\n", direccion);
+    printf("Telefono: %s\n", telefono);
     printf("--------------------------------\n");
     printf("------------DETALLES------------\n");
     printf("--------------------------------\n");
@@ -106,8 +129,12 @@ int main(void){
     printf("Cantidad | Precio por Unidad | Descripcion\n");
     for(int j = 0; j < 5; j++){
 
-        printf("%d | %d\n", arrayCantidad[j], arrayPrecioUnidad[j]);
+        printf("%d        | %d                 | %s                \n", arrayCantidad[j], arrayPrecioUnidad[j], arrayDescripcion[j]);
     }
+
+    printf("Subtotal: %d$\n", subtotal);
+    printf("Total: %d$\n", total);
+
 
     system("pause");
 
