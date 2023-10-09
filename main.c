@@ -5,8 +5,6 @@
 
 int main(void){
 
-    char cedula[10] = "1723372825";
-
     //variables de ingreso de datos
     char nombre[100], apellido[100], ingresoCedula[10], direccion[100], telefono[10];
 
@@ -16,14 +14,12 @@ int main(void){
     char descripcion[100], arrayDescripcion[5][100];
 
     //Variables para verificar la cedula
-    char digitoChar;
-    int digito, numeroFinal = 0, residuo;
+    int digito, numeroFinal, residuo;
     int sumatoria = 0, flag = 0, verificarCedula;
-
 
     //Verificar cedula
     do{
-        
+        numeroFinal = 0;
         printf("\t---FACTURA---\n");
         printf("Cedula:\t ");
         scanf("%s", ingresoCedula);
@@ -31,7 +27,7 @@ int main(void){
         for (size_t i = 0; i < 9; i++){
             
             digito = (int) ingresoCedula[i] - 48;
-
+            
             if(flag == 0){
 
                 digito = digito * 2;
@@ -55,18 +51,15 @@ int main(void){
             numeroFinal = 0;
         else
             numeroFinal = (sumatoria + residuo) - sumatoria;
-        ingresoCedula[9] = (char) numeroFinal + 48;
-        
-        verificarCedula = strcmp("1723372825", ingresoCedula);
-        
-        if(verificarCedula != 0){
+      
+        if(((int) ingresoCedula[9] - 48) != numeroFinal){
 
             printf("ERROR, Cedula incorecta\n");
             system("pause");
             system("cls");
         }
 
-    }while(verificarCedula != 0);
+    }while(((int) ingresoCedula[9] - 48) != numeroFinal);
         
     printf("Nombre:\t ");
     scanf("%s", nombre);
