@@ -15,16 +15,18 @@ int main(void){
 
     //Variables para verificar la cedula
     int digito, numeroFinal, residuo;
-    int sumatoria = 0, flag = 0, verificarCedula;
+    int sumatoria, flag, verificarCedula;
 
     //Verificar cedula
     do{
-        numeroFinal = 0;
+        sumatoria = 0;
+        flag = 0;
         printf("\t---FACTURA---\n");
         printf("Cedula:\t ");
         scanf("%s", ingresoCedula);
         printf("\n");
-        for (size_t i = 0; i < 9; i++){
+        
+        for (int i = 0; i < 9; i++){
             
             digito = (int) ingresoCedula[i] - 48;
             
@@ -39,7 +41,7 @@ int main(void){
                 flag = 1;
             }else{
 
-            flag = 0;
+                flag = 0;
             }
             
             sumatoria = sumatoria + digito;
@@ -76,7 +78,6 @@ int main(void){
     system("pause");
     system("cls");
 
-        
     //ingreso de datos cantidad y precios
     for(int i = 1; i <= 5; i++){
 
