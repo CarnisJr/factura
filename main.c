@@ -9,7 +9,7 @@ int main(void){
     char nombre[100], apellido[100], ingresoCedula[10], direccion[100], telefono[10];
 
     //variables precios y cantidad de productos
-    int cant, precioUnidad, total, subtotal;
+    int cant, precioUnidad, total = 0, subtotal = 0;
     int arrayCantidad[5], arrayPrecioUnidad[5];
     char descripcion[100], arrayDescripcion[5][100];
 
@@ -63,17 +63,18 @@ int main(void){
 
     }while(((int) ingresoCedula[9] - 48) != numeroFinal);
         
-    printf("Nombre:\t ");
+    printf("Nombre: ");
     scanf("%s", nombre);
     printf("\n");
-    printf("Apellido:\t ");
+    printf("Apellido: ");
     scanf("%s", apellido);
     printf("\n");
-    printf("Direccion:\t ");
-    scanf("%s", direccion);
-    printf("\n");
-    printf("Telefono:\t ");
+    printf("Telefono: ");
     scanf("%s", telefono);
+    printf("\n");
+    fflush(stdin);
+    printf("Direccion: ");
+    scanf("%s", direccion);
     printf("\n");
     system("pause");
     system("cls");
@@ -114,18 +115,30 @@ int main(void){
 
     //Impresion de los detalles
     printf("Nombre: %s %s\n", nombre, apellido);
+    printf("Cedula: ");
+    for(size_t i = 0; i <= 9; i++){
+        
+        printf("%c", ingresoCedula[i]);     
+    }
+    puts(" ");
     printf("Direccion: %s\n", direccion);
-    printf("Telefono: %s\n", telefono);
+    printf("Telefono: ");
+    for(size_t i = 0; i <= 9; i++){
+        
+        printf("%c", telefono[i]);     
+    }
+    puts(" ");
     printf("--------------------------------\n");
     printf("------------DETALLES------------\n");
     printf("--------------------------------\n");
 
-    printf("Cantidad | Precio por Unidad | Descripcion\n");
+    printf("Cantidad   | Precio por Unidad   | Descripcion\n");
     for(int j = 0; j < 5; j++){
 
-        printf("%d        | %d                 | %s                \n", arrayCantidad[j], arrayPrecioUnidad[j], arrayDescripcion[j]);
+        printf("%d          | %d                  | %s                \n", arrayCantidad[j], arrayPrecioUnidad[j], arrayDescripcion[j]);
     }
 
+    puts(" ");
     printf("Subtotal: %d$\n", subtotal);
     printf("Total: %d$\n", total);
 
